@@ -19,10 +19,9 @@ main(void) {
     FILE* f = fopen("arestas.in", "r");
 
     while (fscanf(f, "%d %d", &aux, &tmp) != EOF) {
-        if ((aux < 0 || aux > limit) || (tmp < 0 || tmp > limit)) {
-            printf("break - %d\n", quantity);
+        if ((aux < 0 || aux > limit) || (tmp < 0 || tmp > limit))
             break;
-        }
+
         v = new_vertex(aux);
         w = new_vertex(tmp);
 
@@ -30,6 +29,7 @@ main(void) {
         w = add_vertex(g, w);
 
         add_adjacent(v, w);
+        // Para tornar este grafo em dígrafo, basta omitir a instrução abaixo.
         add_adjacent(w, v);
     }
 
@@ -51,10 +51,13 @@ main(void) {
 
                 v = new_vertex(aux);
                 w = new_vertex(tmp);
+
+                v = add_vertex(g, v);
+                w = add_vertex(g, w);
+
                 add_adjacent(v, w);
+                // Para tornar este grafo em dígrafo, basta omitir a instrução abaixo.
                 add_adjacent(w, v);
-                add_vertex(g, v);
-                add_vertex(g, w);
                 break;
 
             case 2:
@@ -80,20 +83,27 @@ main(void) {
                 break;
 
             case 7:
-                printf("The sum of all vertex degrees is %d\n\n", sum(g));
+                printf("The sum of all vertex degrees is %d.\n\n", sum(g));
                 break;
 
             case 8:
-                exclude_edge(g, tmp, aux);
-            
+                printf("Please, type the vertexes values: ");
+                scanf("%d %d", aux, tmp);
+                puts("");
+                exclude_edge(g, aux, tmp);
+                break;
+
             case 9:
                 show_all(g);
+                break;
 
             case 10:
                 show_all_adjacents(g);
+                break;
 
             default:
                 break;
         }
     } while (option != 0);
+    printf("Thank you.\n");
 }
