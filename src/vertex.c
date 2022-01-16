@@ -1,19 +1,5 @@
-#include <stdio.h> 
-#include <stdlib.h>
+#include "vertex.h"
 
-typedef int data;
-
-struct vertex {
-    data x;             // Valor.
-    int link;           // Laço.
-    int qt_adjacents;   // Quantidade de adjacentes.
-    int qt_parallels;   // Quantidade de paralelos.
-    int parallel_degree;
-    struct vertex* adjacents[12];
-    struct vertex* parallels[12];
-};
-
-typedef struct vertex vertex;
 
 vertex*
 new_vertex(data x) {
@@ -30,20 +16,15 @@ new_vertex(data x) {
 }
 
 int
-length(vertex* v) {
-    if (v == NULL)
-        return 0;
-
-    return sizeof(v) / sizeof(v[0]);
-}
-
-int
 degree(vertex* v) {
     return v->qt_adjacents + v->qt_parallels + v->link;
 }
 
 void
 show_vertex(vertex* v) {
+    if (v == NULL)
+        return;
+
     printf("(%d), degree %d and %d links.\n", v->x, degree(v), v->link / 2);
 }
 

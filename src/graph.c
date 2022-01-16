@@ -1,20 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-#include "vertex.c"
-#include "sort.c"
+#include "graph.h"
 
 int
 comp(data x, data y) {
     return x > y;
 }
-
-struct graph {
-    int quantity;
-    vertex* vertexs[20];
-};
-
-typedef struct graph graph;
 
 graph*
 new_graph() {

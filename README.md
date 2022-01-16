@@ -7,7 +7,7 @@ G(V,A), não-direcionado.
 
 2 - Em seguido o programa deve lê um arquivo de texto em que cada linha contém 
 dois números inteiros v e w, (sendo 0 <= v, w < n) representando um par de 
-vértices adjacentes do grafo. A leitura termina quando lê os valores -1 -1.
+vértices adjacentes do grafo. A leitura termina quando lê os valores `-1` `-1`.
 
 ## 3 - Após o carregamento da matriz, o programa deve:
 

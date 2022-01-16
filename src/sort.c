@@ -1,6 +1,4 @@
-#include <stdio.h>
-
-typedef int data;
+#include "sort.h"
 
 
 void

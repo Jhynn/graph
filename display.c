@@ -1,22 +1,27 @@
 /*
- * No terminal digite make (se o tiver - no linux é pre-instalado).
- * senão, execute o comando: gcc display.c && ./a.out
+ * Se você tiver make (nas distribuições linux é pre-instalado) no seu SO:
+ * No terminal, para compilar e executar, digite: make
+ *  
+ * Para remover o arquivo executável, use: make clean
  * 
  * Matheus H. S. Miranda.
 */
 
+// Caso não tenha o make, execute o comando:
+// gcc -Ilib -o a.out src/*.c display.c && ./a.out
 
 #include <stdio.h>
-#include "graph.c"
+#include "graph.h"
+
 
 int
 main(void) {
-    int option = 0, aux, tmp, limit = 20, quantity = 0;
+    int option = 0, aux, tmp, limit = 20;
     graph*  g = new_graph();
     vertex* v = malloc(sizeof(vertex));
     vertex* w = malloc(sizeof(vertex));
 
-    FILE* f = fopen("arestas.in", "r");
+    FILE* f = fopen("data/arestas.in", "r");
 
     while (fscanf(f, "%d %d", &aux, &tmp) != EOF) {
         if ((aux < 0 || aux > limit) || (tmp < 0 || tmp > limit))
@@ -40,6 +45,7 @@ main(void) {
         puts("5 - Are there loops.\t\t\t6 - Are there parallels edges.");
         puts("7 - The sum of the degrees.\t\t8 - Exclude an edge.");
         puts("9 - Show all vertexs.\t\t\t10 - Show the graph's adjacency list.");
+        puts("11 - Ride");
         printf("\nEnter an option: ");
         scanf("%d", &option);
         puts("");
@@ -88,7 +94,7 @@ main(void) {
 
             case 8:
                 printf("Please, type the vertexes values: ");
-                scanf("%d %d", aux, tmp);
+                scanf("%d %d", &aux, &tmp);
                 puts("");
                 exclude_edge(g, aux, tmp);
                 break;
@@ -102,8 +108,9 @@ main(void) {
                 break;
 
             default:
+                puts("Type 0 to exit.");
                 break;
         }
     } while (option != 0);
-    printf("Thank you.\n");
+    puts("Thank you.");
 }
