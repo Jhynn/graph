@@ -33,7 +33,8 @@ void show_all_adjacents(graph* g);
 
 int is_a_possible_walk(graph* g, int *ride, int length);
 int ride(graph* g, int *ride, int length);
-int path(graph* g, int *ride, int length);
-int trail(graph* g, int *ride, int length);
+int path(graph* g, int *path, int length);
+int trail(graph* g, int *trail, int length);
+int cycle(graph* g, int *cycle, int length);
 
 #endif  // graph.h

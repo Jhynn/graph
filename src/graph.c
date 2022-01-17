@@ -278,3 +278,18 @@ trail(graph* g, int* trail, int length) {
     
     return 0;
 }
+
+int
+path(graph* g, int *path, int length) {
+    if (!trail(g, path, length))
+        return 0;
+
+    for (size_t i = 0; i < length-1; i++) {
+        for (size_t j = i+1; j < length-1; j++) {
+            if (path[i] == path[j])
+                return 0;
+        }
+    }
+
+    return 1;
+}

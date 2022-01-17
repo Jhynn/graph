@@ -47,7 +47,7 @@ main(void) {
         puts("5 - Are there loops.\t\t\t6 - Are there parallels edges.");
         puts("7 - The sum of the degrees.\t\t8 - Exclude an edge.");
         puts("9 - Show all vertexs.\t\t\t10 - Show the graph's adjacency list.");
-        puts("11 - Ride\t12 - Trail");
+        puts("11 - Ride\t12 - Trail\t\t13 - Path");
         printf("\nEnter an option: ");
         scanf("%d", &option);
         puts("");
@@ -142,6 +142,23 @@ main(void) {
 
                 if (trail(g, n, aux))
                     puts("\nIt's a valid trail.\n");
+                else
+                    puts("\nIt's not possible.\n");
+                break;
+
+            case 13:
+                printf("Type the length of the path, please: ");
+                scanf("%d", &aux);
+                n = calloc(aux, sizeof(int));
+
+                for (size_t i = 0; i < aux; i++) {
+                    printf("Type, the %ldth element: ", i+1);
+                    scanf("%d", &tmp);
+                    *(n+i) = tmp;
+                }
+
+                if (path(g, n, aux))
+                    puts("\nIt's a valid path.\n");
                 else
                     puts("\nIt's not possible.\n");
                 break;
