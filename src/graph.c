@@ -267,3 +267,14 @@ ride(graph* g, int* ride, int length) {
     }
     return 1;
 }
+
+int
+trail(graph* g, int* trail, int length) {
+    if (!ride(g, trail, length))
+        return 0;
+    
+    if (trail[0] == trail[length-1])
+        return 1;
+    
+    return 0;
+}

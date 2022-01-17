@@ -3,8 +3,7 @@
 
 #include <stdio.h>      // printf(), puts(), scanf()...
 #include <stdlib.h>     // Due dynamic memory allocation.
-#include <stdarg.h>     // Provides the functions and macros to implement
-                        // the feature of variable arguments.
+
 
 #include "vertex.h"
 #include "sort.h"
