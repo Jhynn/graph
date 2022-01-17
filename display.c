@@ -17,6 +17,8 @@
 int
 main(void) {
     int option = 0, aux, tmp, limit = 20;
+    data* n;
+
     graph*  g = new_graph();
     vertex* v = malloc(sizeof(vertex));
     vertex* w = malloc(sizeof(vertex));
@@ -51,6 +53,9 @@ main(void) {
         puts("");
 
         switch (option) {
+            case 0:
+                break;
+
             case 1:
                 puts("Please, enter the values: ");
                 scanf("%d %d", &aux, &tmp);
@@ -107,8 +112,25 @@ main(void) {
                 show_all_adjacents(g);
                 break;
 
+            case 11:
+                printf("Type the length of the ride, please: ");
+                scanf("%d", &aux);
+                n = calloc(aux, sizeof(int));
+
+                for (size_t i = 0; i < aux; i++) {
+                    printf("Type, the %ldth element: ", i+1);
+                    scanf("%d", &tmp);
+                    *(n+i) = tmp;
+                }
+
+                if (ride(g, n, aux))
+                    puts("\nIt's possible.\n");
+                else
+                    puts("\nIt's not possible.");
+                break;
+
             default:
-                puts("Type 0 to exit.");
+                puts("Please, type a valid option ─ 0 to exit.\n");
                 break;
         }
     } while (option != 0);

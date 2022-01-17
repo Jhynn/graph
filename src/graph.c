@@ -227,3 +227,43 @@ show_all_adjacents(graph* g) {
     for (size_t i = 0; i < g->quantity; i++)
         show_adjacents(g->vertexs[i]);
 }
+
+int
+is_a_possible_walk(graph* g, int* walk, int length) {
+    int occurrences = 0;
+    
+    for (size_t i = 0; i < length; i++) {
+        for (size_t j = 0; j < g->quantity; j++) {
+            if (*(walk + i) == g->vertexs[j]->x)
+                occurrences++;
+
+            if (occurrences) {
+                occurrences = 0;
+                break;
+            } else if (j == g->quantity - 1)
+                return 0;
+        }
+    }
+
+    return 1;
+}
+
+int
+ride(graph* g, int* ride, int length) {
+    if (!is_a_possible_walk(g, ride, length))
+        return 0;
+
+    vertex* v = add_vertex(g, new_vertex(ride[0]));
+
+    for (size_t i = 1; i < length; i++) {
+        for (size_t j = 0; j < v->qt_adjacents; j++) {
+            if (ride[i] == v->adjacents[j]->x) {
+                v = v->adjacents[j];
+                break;
+            }
+        }
+        if (v->x != ride[i])
+            return 0;
+    }
+    return 1;
+}
