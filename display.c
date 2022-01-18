@@ -47,7 +47,7 @@ main(void) {
         puts("5 - Are there loops.\t\t\t6 - Are there parallels edges.");
         puts("7 - The sum of the degrees.\t\t8 - Exclude an edge.");
         puts("9 - Show all vertexs.\t\t\t10 - Show the graph's adjacency list.");
-        puts("11 - Ride\t12 - Trail\t\t13 - Path");
+        puts("11 - Ride\t12 - Trail\t\t13 - Circuit\t14 - Path\t15 - Cycle");
         printf("\nEnter an option: ");
         scanf("%d", &option);
         puts("");
@@ -147,6 +147,23 @@ main(void) {
                 break;
 
             case 13:
+                printf("Type the length of the circuit, please: ");
+                scanf("%d", &aux);
+                n = calloc(aux, sizeof(int));
+
+                for (size_t i = 0; i < aux; i++) {
+                    printf("Type, the %ldth element: ", i+1);
+                    scanf("%d", &tmp);
+                    *(n+i) = tmp;
+                }
+
+                if (circuit(g, n, aux))
+                    puts("\nIt's a valid circuit.\n");
+                else
+                    puts("\nIt's not possible.\n");
+                break;
+
+            case 14:
                 printf("Type the length of the path, please: ");
                 scanf("%d", &aux);
                 n = calloc(aux, sizeof(int));
@@ -159,6 +176,23 @@ main(void) {
 
                 if (path(g, n, aux))
                     puts("\nIt's a valid path.\n");
+                else
+                    puts("\nIt's not possible.\n");
+                break;
+
+            case 15:
+                printf("Type the length of the cycle, please: ");
+                scanf("%d", &aux);
+                n = calloc(aux, sizeof(int));
+
+                for (size_t i = 0; i < aux; i++) {
+                    printf("Type, the %ldth element: ", i+1);
+                    scanf("%d", &tmp);
+                    *(n+i) = tmp;
+                }
+
+                if (cycle(g, n, aux))
+                    puts("\nIt's a valid cycle.\n");
                 else
                     puts("\nIt's not possible.\n");
                 break;

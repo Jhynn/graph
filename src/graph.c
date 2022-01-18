@@ -272,10 +272,43 @@ int
 trail(graph* g, int* trail, int length) {
     if (!ride(g, trail, length))
         return 0;
-    
-    if (trail[0] == trail[length-1])
+    else if (length < 3)
         return 1;
-    
+    else if (length == 3) {
+        if (trail[0] == trail[2])
+            return 0;
+        return 1;
+    } else if (length == 4) {
+        if (trail[0] == trail[2] || trail[1] == trail[3])
+            return 0;
+    }
+
+    for (size_t i = 1; i < length-1; i++) {
+        for (size_t j = i+2; j < length-1; j++) {
+            if (trail[i] == trail[j]) {   // No edge must repeat.
+                printf("(%ld) trail[i]: %d (%ld) trail[j]: %d", i, trail[i], j, trail[j]);
+
+                if (trail[i-1] == trail[j-1] || trail[i+1] == trail[j+1] || \
+                        trail[i-1] == trail[j+1] || trail[i+1] == trail[j-1])
+                    return 0;
+            } else if (j+1 == length-1 && trail[j] == trail[i-1] && \
+                    trail[i] == trail[j+1]) {
+                return 0;
+            }
+        }
+    }
+
+    return 1;
+}
+
+int
+circuit(graph* g, int *circuit, int length) {
+    if (!trail(g, circuit, length))
+        return 0;
+
+    if (circuit[0] == circuit[length-1])
+        return 1;
+
     return 0;
 }
 
@@ -284,9 +317,27 @@ path(graph* g, int *path, int length) {
     if (!trail(g, path, length))
         return 0;
 
+    for (size_t i = 0; i < length; i++) {
+        for (size_t j = i+1; j < length; j++) {
+            if (path[i] == path[j])
+                return 0;
+        }
+    }
+
+    return 1;
+}
+
+int
+cycle(graph* g, int *cycle, int length) {
+    if (!trail(g, cycle, length))
+        return 0;
+
+    if (cycle[0] != cycle[length-1])
+        return 0;
+
     for (size_t i = 0; i < length-1; i++) {
         for (size_t j = i+1; j < length-1; j++) {
-            if (path[i] == path[j])
+            if (cycle[i] == cycle[j])
                 return 0;
         }
     }
